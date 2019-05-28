@@ -1,2 +1,2 @@
 // 导出轮播图
-module.exports = ['https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/54b19703c0fc83a9bc6b12ace5327107.jpg','https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/ee04dbf01ddb4fe19df0b0a51d0f399c.jpg','https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/f2da4f8af1d0201b4c75d630b79b5b78.jpg']
+module.exports = ['https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/ee04dbf01ddb4fe19df0b0a51d0f399c.jpg','https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/54b19703c0fc83a9bc6b12ace5327107.jpg','https://wwwstatic.vivo.com.cn/vivoportal/files/image/home/20190422/f2da4f8af1d0201b4c75d630b79b5b78.jpg']

@@ -11,7 +11,7 @@
           :to="{ name: 'detail', params: { id: item.id } }"
         >
           <!-- <router-link v-for="item in pagelist" :key="item.id" tag='li' :to="{name:'detail',query:{id:item.id}}"> -->
-          <img :src="item.img" alt="" />
+          <img v-lazy="item.img" alt="" />
           <p>{{ item.name }}</p>
           <p>{{ item.info }}</p>
           <p>{{ item.price }}$</p>
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { getPage } from "../api";
+import { getPage, addGood, addList } from "../api";
 export default {
   name: "about",
   data() {
@@ -52,6 +52,7 @@ export default {
     },
     // 滚动加载更多
     sLoadM() {
+      // console.log(123)
       // console.dir(this.$refs.eleScr);
       // 函数节流/函数防抖
       // 我规定在一段时间内只触发一次
@@ -73,24 +74,15 @@ export default {
       this.getList();
     },
     // 添加到购物车
-    addCar(good) {
-      // 从缓存里面取出购物车数组，如果没有，自己定义一个空的
-      let carlist = localStorage["carlist"]
-        ? JSON.parse(localStorage["carlist"])
-        : [];
-      // 如果购物车已经存在了，数量加1，没有的话数量为1，我们自己定义一个数量的变量叫做count
-      let caritem = carlist.find(item => item.id == good.id);
-      caritem ? (caritem.count += 1) : (good.count = 1);
-      // 如果购物车有这一项就不再往数组里面添加了
-      // sele设置了一个是否选中的值
-      if (!caritem) {
-        carlist = [...carlist, good];
-        good.sele = true;
+    async addCar(good) {
+      // 提交请求到后端
+      // good = JSON.stringify(good);
+      let { code, msg } = await addGood(good);
+      if (code == 200) {
+        alert("添加成功");
       } else {
-        caritem.sele = true;
+        alert("网络错误，请稍后再试");
       }
-      // 新的购物车数组再重新扔到缓存里面
-      localStorage["carlist"] = JSON.stringify(carlist);
     }
   }
 };

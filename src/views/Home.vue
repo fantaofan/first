@@ -5,14 +5,14 @@
         <Loading></Loading>
       </div>
       <template v-if="!showLoading">
-        <Banner :swiperSlides='sliders'></Banner>
+        <Banner :swiperSlides="sliders"></Banner>
         <div class="home-list">
           <ul>
             <li v-for="item in homelist" :key="item.id">
-              <img :src="item.img" alt="">
-              <p>{{item.name}}</p>
-              <p>{{item.info}}</p>
-              <p>{{item.price}}</p>
+              <img :src="item.img" alt="" />
+              <p>{{ item.name }}</p>
+              <p>{{ item.info }}</p>
+              <p>{{ item.price }}</p>
             </li>
           </ul>
         </div>
@@ -20,12 +20,11 @@
     </div>
   </div>
 </template>
-
 <script>
-import Loading from '../components/Loading'
-import Banner from '../components/Banner';
-import Msg from '@/components/Msg.vue'; // 1、引入
-import {getHomeAll} from '../api'; // 解构赋值出来getBanner的方法
+import Loading from "../components/Loading";
+import Banner from "../components/Banner";
+import Msg from "@/components/Msg.vue"; // 1、引入
+import { getHomeAll } from "../api"; // 解构赋值出来getBanner的方法
 
 export default {
   name: "home",
@@ -33,19 +32,19 @@ export default {
     Banner,
     Loading
   },
-  data () {
+  data() {
     return {
       sliders: [],
-      homelist:[],
+      homelist: [],
       showLoading: true
-    }
+    };
   },
-  created () {
-    this.getAll()
+  created() {
+    this.getAll();
   },
   methods: {
-    async getAll(){
-      let [{data:sliders},{data:homelist}] = await getHomeAll()
+    async getAll() {
+      let [{ data: sliders }, { data: homelist }] = await getHomeAll();
       this.sliders = sliders;
       this.homelist = homelist;
       // 数据都拿到了
@@ -55,25 +54,25 @@ export default {
 };
 </script>
 <style lang="less">
-  .home-list{
-    ul{
-      padding: 0 15px;
-      box-sizing: border-box;
+.home-list {
+  ul {
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      width: 50%;
       display: flex;
-      flex-wrap: wrap;
-      li{
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        border-bottom: 1px solid #eee;
-        img{
-          max-width: 90%;
-          height: auto;
-          }
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      border-bottom: 1px solid #eee;
+      img {
+        max-width: 90%;
+        height: auto;
       }
     }
   }
+}
 </style>
